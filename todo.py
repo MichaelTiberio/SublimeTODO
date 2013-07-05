@@ -231,11 +231,13 @@ class TodoRenderer(object):
         for message_type, matches in groupby(messages, key=key_func):
             matches = list(matches)
             if matches:
-                yield ('header', u'\n## {0} ({1})'.format(message_type.upper().decode('utf8', 'ignore'), len(matches)), {})
+                header = u'+ -- {0} ({1}) '.format(message_type.upper().decode('utf8', 'ignore'), len(matches))
+                header = u'\n{0}{1} +'.format(header, '-' * (78 - len(header)))
+                yield ('header', header, {})
                 for idx, m in enumerate(matches, 1):
                     msg = m['match'].msg.decode('utf8', 'ignore') ## Don't know the file encoding
                     filepath = path.basename(m['filepath'])
-                    line = u"{idx}. {filepath}:{linenum} {msg}".format(
+                    line = u"{idx:3}. {filepath}:{linenum} - {msg}".format(
                         idx=idx, filepath=filepath, linenum=m['linenum'], msg=msg)
                     yield ('result', line, m)
 
