@@ -75,6 +75,13 @@
             {"key": "setting.command_mode", "operand": true}
             // {"key": "setting.todo_results"}
         ]
-    }
+    },
 
+    {
+        "keys": ["keypad_enter"], "command": "goto_comment",
+        "context": [
+            {"key": "setting.command_mode", "operand": true}
+            // {"key": "setting.todo_results"}
+        ]
+    }
 ]
